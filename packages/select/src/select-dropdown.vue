@@ -74,11 +74,11 @@
       },
 
       debounce() {
-        return 300;
+        return this.$parent.remote ? 300 : 0;
       },
 
       filterable() {
-        return this.$parent.filterable;
+        return this.$parent.filterable && !this.$parent.allowCreate;
       }
     },
 
@@ -94,9 +94,11 @@
       this.$on('updatePopper', () => {
         if (this.$parent.visible) {
           this.updatePopper();
-          setTimeout(() => {
-            this.$refs.input.focus();
-          }, 500);
+          if (this.filterable) {
+            setTimeout(() => {
+              this.$refs.input.focus();
+            }, 500);
+          }
         }
       });
       this.$on('destroyPopper', () => {
