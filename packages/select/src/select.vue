@@ -854,6 +854,7 @@
 
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
+      this.$on('setQuery', this.handleQueryChange);
     },
 
     mounted() {
