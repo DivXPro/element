@@ -4,7 +4,9 @@
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }">
     <el-input 
+      ref="input"
       prefix-icon="el-icon-search"
+      @focus="focusHandle"
       @keyup.native="debouncedOnInputChange"
       @paste.native="debouncedOnInputChange"
       v-model="key"></el-input>
@@ -16,6 +18,7 @@
   import debounce from 'throttle-debounce/debounce';
   import Popper from 'element-ui/src/utils/vue-popper';
   import Emitter from 'element-ui/src/mixins/emitter';
+  import Focus from 'element-ui/src/mixins/focus';
   import ElInput from 'element-ui/packages/input';
 
   export default {
@@ -23,7 +26,7 @@
 
     componentName: 'ElSelectDropdown',
 
-    mixins: [Popper, Emitter],
+    mixins: [Popper, Emitter, Focus('inputRef')],
 
     props: {
       placement: {
@@ -63,6 +66,9 @@
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.dispatch('ElSelect', 'setQuery', [this.key]);
       });
+      this.focusHandle = () => {
+        console.log('focusHandle');
+      };
     },
 
     computed: {
@@ -81,9 +87,16 @@
       this.referenceElm = this.$parent.$refs.reference.$el;
       this.$parent.popperElm = this.popperElm = this.$el;
       this.$on('updatePopper', () => {
-        if (this.$parent.visible) this.updatePopper();
+        if (this.$parent.visible) {
+          this.updatePopper();
+          setTimeout(() => {
+            this.$refs.input.focus();
+          }, 500);
+        }
       });
-      this.$on('destroyPopper', this.destroyPopper);
+      this.$on('destroyPopper', () => {
+        this.destroyPopper();
+      });
     },
   
     components: {
