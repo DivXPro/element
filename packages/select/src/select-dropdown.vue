@@ -4,6 +4,7 @@
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
     :style="{ minWidth: minWidth }">
     <el-input 
+      v-if="filterable"
       ref="input"
       prefix-icon="el-icon-search"
       @keyup.native="debouncedOnInputChange"
@@ -74,6 +75,10 @@
 
       debounce() {
         return 300;
+      },
+
+      filterable() {
+        return this.$parent.filterable;
       }
     },
 

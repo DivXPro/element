@@ -46,7 +46,7 @@
         type="text"
         class="el-select__input"
         :class="[selectSize ? `is-${ selectSize }` : '']"
-        :disabled="selectDisabled"
+        disabled
         :autocomplete="autoComplete"
         @focus="handleFocus"
         @blur="softFocus = false"
