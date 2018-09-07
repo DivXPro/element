@@ -6,7 +6,6 @@
     <el-input 
       ref="input"
       prefix-icon="el-icon-search"
-      @focus="focusHandle"
       @keyup.native="debouncedOnInputChange"
       @paste.native="debouncedOnInputChange"
       v-model="key"></el-input>
@@ -26,7 +25,7 @@
 
     componentName: 'ElSelectDropdown',
 
-    mixins: [Popper, Emitter, Focus('inputRef')],
+    mixins: [Popper, Emitter, Focus('input')],
 
     props: {
       placement: {
@@ -66,14 +65,15 @@
       this.debouncedOnInputChange = debounce(this.debounce, () => {
         this.dispatch('ElSelect', 'setQuery', [this.key]);
       });
-      this.focusHandle = () => {
-        console.log('focusHandle');
-      };
     },
 
     computed: {
       popperClass() {
         return this.$parent.popperClass;
+      },
+
+      debounce() {
+        return 300;
       }
     },
 

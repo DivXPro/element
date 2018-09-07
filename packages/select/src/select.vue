@@ -200,7 +200,7 @@
           this.value !== undefined &&
           this.value !== null &&
           this.value !== '';
-        return criteria ? 'circle-close is-show-close' : (this.remote && this.filterable ? '' : 'arrow-up');
+        return criteria ? 'circle-close is-show-close' : 'arrow-up';
       },
 
       debounce() {
@@ -852,6 +852,9 @@
         this.handleQueryChange(e.target.value);
       });
 
+      if (this.remoteMethod && typeof this.remoteMethod === 'function') {
+        this.remoteMethod('');
+      }
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);
       this.$on('setQuery', this.handleQueryChange);
