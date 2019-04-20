@@ -1,76 +1,3 @@
-<style>
-  .demo-transfer {
-    .transfer-footer {
-      margin-left: 15px;
-      padding: 6px 5px;
-    }
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      const generateData = _ => {
-        const data = [];
-        for (let i = 1; i <= 15; i++) {
-          data.push({
-            key: i,
-            label: `Option ${ i }`,
-            disabled: i % 4 === 0
-          });
-        }
-        return data;
-      };
-      const generateData2 = _ => {
-        const data = [];
-        const states = ['California', 'Illinois', 'Maryland', 'Texas', 'Florida', 'Colorado', 'Connecticut '];
-        const initials = ['CA', 'IL', 'MD', 'TX', 'FL', 'CO', 'CT'];
-        states.forEach((city, index) => {
-          data.push({
-            label: city,
-            key: index,
-            initial: initials[index]
-          });
-        });
-        return data;
-      };
-      const generateData3 = _ => {
-        const data = [];
-        for (let i = 1; i <= 15; i++) {
-          data.push({
-            value: i,
-            desc: `Option ${ i }`,
-            disabled: i % 4 === 0
-          });
-        }
-        return data;
-      };
-      return {
-        data: generateData(),
-        data2: generateData2(),
-        data3: generateData3(),
-        value1: [1, 4],
-        value2: [],
-        value3: [1],
-        value4: [1],
-        value5: [],
-        filterMethod(query, item) {
-          return item.initial.toLowerCase().indexOf(query.toLowerCase()) > -1;
-        },
-        renderFunc(h, option) {
-          return <span>{ option.key } - { option.label }</span>;
-        }
-      };
-    },
-    
-    methods: {
-      handleChange(value, direction, movedKeys) {
-        console.log(value, direction, movedKeys);
-      }
-    }
-  };
-</script>
-
 ## Transfer
 
 ### Uso básico
@@ -288,6 +215,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Atributos
 | Atriburo              | Descripcion                              | Tipo                            | Valores aceptados | Por defecto                              |
 | --------------------- | ---------------------------------------- | ------------------------------- | ----------------- | ---------------------------------------- |
+| value / v-model        | valor enlazado                           | array                           | —                 | —                                        |
 | data                  | Origen de datos                          | array[{ key, label, disabled }] | —                 | [ ]                                      |
 | filterable            | Si se puede filtrar                      | boolean                         | —                 | false                                    |
 | filter-placeholder    | Placeholder para el input del filtro     | string                          | —                 | Enter keyword                            |
@@ -310,7 +238,7 @@ Por defecto Transfer busca los atributos `key`, `label`, y `disabled` en cada el
 ### Scoped Slot
 | Name | Description |
 |------|--------|
-| — | Custom content for data items. The scope parameter is { option } |
+| — | Contenido personalizado para los datos de los items. El parametro del scope es { option } |
 
 ### Methods
 | Method | Description | Parameters |
