@@ -111,13 +111,3 @@
     }
   };
 </script>
-<style lang="scss">
-  .el-select-dropdown {
-    .el-input__inner {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border: none;
-      border-bottom: 1px solid #e7eaf1;
-    }
-  }
-</style>

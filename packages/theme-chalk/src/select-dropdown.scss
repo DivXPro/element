@@ -37,6 +37,13 @@
   .el-scrollbar.is-empty .el-select-dropdown__list{
     padding: 0;
   }
+
+  .el-input__inner {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: none;
+    border-bottom: 1px solid #e7eaf1;
+  }
 }
 
 @include b(select-dropdown__empty) {
