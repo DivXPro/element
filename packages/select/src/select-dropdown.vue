@@ -10,6 +10,7 @@
       @keyup.native="debouncedOnInputChange"
       @paste.native="debouncedOnInputChange"
       v-model="key"></el-input>
+    <el-tree v-if="tree" :data="treeData" :props="treeProps" @node-click="handleNodeClick"></el-tree>
     <slot></slot>
   </div>
 </template>
@@ -20,6 +21,7 @@
   import Emitter from 'element-ui/src/mixins/emitter';
   import Focus from 'element-ui/src/mixins/focus';
   import ElInput from 'element-ui/packages/input';
+  import Tree from 'element-ui/packages/tree';
 
   export default {
     name: 'ElSelectDropdown',
@@ -79,6 +81,18 @@
 
       filterable() {
         return this.$parent.filterable && !this.$parent.allowCreate;
+      },
+
+      tree() {
+        return this.$parent.tree;
+      },
+
+      treeData() {
+        return this.$parent.treeData;
+      },
+
+      treeProps() {
+        return this.$parent.treeProps;
       }
     },
 
@@ -105,9 +119,16 @@
         this.destroyPopper();
       });
     },
+
+    methods: {
+      handleNodeClick({ value }) {
+        this.dispatch('ElSelect', 'handleOptionClick', [{ value }, true]);
+      }
+    },
   
     components: {
-      ElInput
+      ElInput,
+      Tree
     }
   };
 </script>

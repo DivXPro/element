@@ -24,7 +24,7 @@
       return {
         options: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '黄金糕111'
         }, {
           value: '选项2',
           label: '双皮奶'
@@ -515,6 +515,61 @@
 ```
 :::
 
+### 选择Tree
+
+适用选择树状选项
+:::demo `tree`的值为当true时开启，目前不兼容多选和懒加载模式
+```html
+<template>
+  <el-select v-model="value" placeholder="请选择" :tree-data="treeData" :tree-props="treeProps" tree>
+  </el-select>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        value: '',
+        treeData: [{
+          value: 1,
+          label: '一级 1',
+          children: [{
+            value: 2,
+            label: '二级 1-1',
+            children: [{
+              value: 3,
+              label: '三级 1-1-1'
+            }]
+          }]
+        }, {
+          value: 4,
+          label: '一级 2',
+          children: [{
+            value: 5,
+            label: '二级 2-1',
+            children: [{
+              value: 6,
+              label: '三级 2-1-1'
+            }]
+          }, {
+            value: 7,
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }],
+        treeProps: {
+          children: 'children',
+          label: 'label'
+        }
+      }
+    }
+  }
+</script>
+```
+:::
+
 :::tip
 如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
 :::
@@ -548,6 +603,8 @@
 | default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
 | popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
 | automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| tree | 是否树状选项 | boolean | — | false |
+| treeData | 树状选项 | Array | — | - |
 
 ### Select Events
 | 事件名称 | 说明 | 回调参数 |

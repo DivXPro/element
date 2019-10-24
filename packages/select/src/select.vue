@@ -304,6 +304,16 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      tree: {
+        type: Boolean,
+        default: false
+      },
+      treeData: {
+        type: Array
+      },
+      treeProps: {
+        type: Object
       }
     },
 
@@ -539,7 +549,33 @@
         return newOption;
       },
 
+      getNode(tree, value, parentLabel = '') {
+        for (let i = 0; i < tree.length; i += 1) {
+          const current = tree[i];
+          if (tree[i].value === value) {
+            return { value: current.value, currentLabel: `${parentLabel}${current.label}` };
+          } else {
+            if (current.children && current.children.length > 0) {
+              const node = this.getNode(current.children, value, `${parentLabel}${current.label} / `);
+              if (node) {
+                return node;
+              }
+            }
+          }
+        }
+      },
+
       setSelected() {
+        if (this.tree) {
+          const node = this.getNode(this.treeData, this.value);
+          if (node) {
+            this.createdSelected = false;
+            this.selectedLabel = node.currentLabel;
+            this.selected = node;
+            if (this.filterable) this.query = this.selectedLabel;
+          }
+          return;
+        }
         if (!this.multiple) {
           let option = this.getOption(this.value);
           if (option.created) {
