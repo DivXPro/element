@@ -286,7 +286,6 @@ export default {
 
     let column = this.getPropsData(basicProps, sortProps, selectProps, filterProps);
     column = mergeOptions(defaults, column);
-    column.filterable = column.filters || column.filterMethod;
 
     // 注意 compose 中函数执行的顺序是从右到左
     const chains = compose(this.setColumnRenders, this.setColumnWidth, this.setColumnForcedProps);
