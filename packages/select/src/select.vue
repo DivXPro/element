@@ -775,9 +775,9 @@
           } else {
             this.visible = !this.visible;
           }
-          if (this.visible) {
-            (this.$refs.input || this.$refs.reference).focus();
-          }
+          // if (this.visible) {
+          //   (this.$refs.input || this.$refs.reference).focus();
+          // }
         }
       },
 
