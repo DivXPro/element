@@ -725,7 +725,7 @@
           this.emitChange(value);
           if (option.created) {
             this.query = '';
-            this.handleQueryChange('');
+            // this.handleQueryChange('');
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
