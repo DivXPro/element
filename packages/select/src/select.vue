@@ -365,7 +365,7 @@
           }
           if (this.filterable && !this.reserveKeyword) {
             this.query = '';
-            this.handleQueryChange(this.query);
+            // this.handleQueryChange(this.query);
           }
         }
         this.setSelected();
@@ -725,7 +725,7 @@
           this.emitChange(value);
           if (option.created) {
             this.query = '';
-            // this.handleQueryChange('');
+            this.handleQueryChange('');
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
