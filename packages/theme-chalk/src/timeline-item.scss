@@ -37,9 +37,20 @@
       height: $--timeline-node-size-normal;
     }
     @include m(large) {
-      left: -2px;
+      left: -5px;
       width: $--timeline-node-size-large;
       height: $--timeline-node-size-large;
+      @include e(icon) {
+        font-size: $--font-size-large;
+      }
+    }
+    @include m(huge) {
+      left: -11px;
+      width: $--timeline-node-size-huge;
+      height: $--timeline-node-size-huge;
+      @include e(icon) {
+        font-size: $--font-size-huge;
+      }
     }
 
     @include m(primary) {

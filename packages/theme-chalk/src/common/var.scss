@@ -116,6 +116,10 @@ $--font-size-base: 14px !default;
 /// fontSize|1|Font Size|0
 $--font-size-small: 13px !default;
 /// fontSize|1|Font Size|0
+$--font-size-large: 14px !default;
+/// fontSize|1|Font Size|0
+$--font-size-huge: 18px !default;
+/// fontSize|1|Font Size|0
 $--font-size-extra-small: 12px !default;
 /// fontWeight|1|Font Weight|1
 $--font-weight-primary: 500 !default;
@@ -898,7 +902,8 @@ $--main-padding: 20px !default;
 /* Timeline
 --------------------------*/
 $--timeline-node-size-normal: 12px !default;
-$--timeline-node-size-large: 14px !default;
+$--timeline-node-size-large: 20px !default;
+$--timeline-node-size-huge: 32px !default;
 $--timeline-node-color: $--border-color-light !default;
 
 /* Backtop
