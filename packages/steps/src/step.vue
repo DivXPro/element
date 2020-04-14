@@ -28,7 +28,7 @@
           v-if="currentStatus !== 'success' && currentStatus !== 'error'"
           name="icon">
           <i v-if="icon" class="el-step__icon-inner" :class="[icon]"></i>
-          <div class="el-step__icon-inner" v-if="!icon && !isSimple">{{ index + 1 }}</div>
+          <div class="el-step__icon-inner" v-if="!icon && !isSimple">{{ isTextLabel ? title : index + 1 }}</div>
         </slot>
         <i
           v-else
