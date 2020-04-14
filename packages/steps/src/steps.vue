@@ -3,7 +3,8 @@
     class="el-steps"
     :class="[
        !simple && 'el-steps--' + direction,
-       simple && 'el-steps--simple'
+       simple && 'el-steps--simple',
+       text && 'el-steps--text'
      ]">
       <slot></slot>
   </div>
@@ -26,6 +27,7 @@ export default {
     },
     alignCenter: Boolean,
     simple: Boolean,
+    textLabel: Boolean,
     finishStatus: {
       type: String,
       default: 'finish'

@@ -19,7 +19,11 @@
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
 
-      <div class="el-step__icon" :class="`is-${icon ? 'icon' : 'text'}`">
+      <div class="el-step__icon" :class="[
+        `is-${icon ? 'icon' : 'text'}`,
+        isTextLabel && 'is-text-label',
+        'is-'+currentStatus
+        ]">
         <slot
           v-if="currentStatus !== 'success' && currentStatus !== 'error'"
           name="icon">
@@ -37,6 +41,7 @@
     <!-- title & description -->
     <div class="el-step__main">
       <div
+        v-if="!isTextLabel"
         class="el-step__title"
         ref="title"
         :class="['is-' + currentStatus]">
@@ -100,6 +105,9 @@ export default {
     },
     isSimple() {
       return this.$parent.simple;
+    },
+    isTextLabel() {
+      return this.$parent.textLabel;
     },
     isLast() {
       const parent = this.$parent;
