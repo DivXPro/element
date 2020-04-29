@@ -11,7 +11,7 @@
     <!-- icon & line -->
     <div
       class="el-step__head"
-      :class="`is-${currentStatus}`">
+      :class="[`is-${currentStatus}`, isTextLabel && 'is-text-label']">
       <div
         class="el-step__line"
         :style="isLast ? '' : { marginRight: $parent.stepOffset + 'px' }"
@@ -19,7 +19,7 @@
         <i class="el-step__line-inner" :style="lineStyle"></i>
       </div>
 
-      <div class="el-step__icon" :class="[
+      <div @click="handleClick" class="el-step__icon" :class="[
         `is-${icon ? 'icon' : 'text'}`,
         isTextLabel && 'is-text-label',
         'is-'+currentStatus
@@ -44,12 +44,13 @@
         v-if="!isTextLabel"
         class="el-step__title"
         ref="title"
+        @click="handleClick"
         :class="['is-' + currentStatus]">
         <slot name="title">{{ title }}</slot>
       </div>
       <div v-if="isSimple" class="el-step__arrow"></div>
       <div
-        v-else
+        v-if="!isSimple"
         class="el-step__description"
         :class="['is-' + currentStatus]">
         <slot name="description">{{ description }}</slot>
@@ -175,6 +176,10 @@ export default {
         : style.width = step + '%';
 
       this.lineStyle = style;
+    },
+
+    handleClick(evt) {
+      this.$emit('click', evt);
     }
   },
 
