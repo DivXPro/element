@@ -282,6 +282,7 @@
       noMatchText: String,
       noDataText: String,
       remoteMethod: Function,
+      initRemoteMethod: Function,
       filterMethod: Function,
       multiple: Boolean,
       multipleLimit: {
@@ -892,8 +893,17 @@
         this.handleQueryChange(e.target.value);
       });
 
-      if (this.remoteMethod && typeof this.remoteMethod === 'function') {
-        this.remoteMethod('');
+      if (this.value !== null && this.initRemoteMethod && this.initRemoteMethod === 'function') {
+        if (this.multiple && this.value.length === 0) {
+          if (this.remoteMethod && typeof this.remoteMethod === 'function') {
+            this.remoteMethod('');
+          }
+        }
+        this.initRemoteMethod(this.value);
+      } else {
+        if (this.remoteMethod && typeof this.remoteMethod === 'function') {
+          this.remoteMethod('');
+        }
       }
       this.$on('handleOptionClick', this.handleOptionSelect);
       this.$on('setSelected', this.setSelected);

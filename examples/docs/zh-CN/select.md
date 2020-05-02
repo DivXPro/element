@@ -409,6 +409,7 @@
     reserve-keyword
     placeholder="请输入关键词"
     :remote-method="remoteMethod"
+    :init-remote-method="initRemoteMethod"
     :loading="loading">
     <el-option
       v-for="item in options"
@@ -424,7 +425,7 @@
     data() {
       return {
         options: [],
-        value: [],
+        value: ['value:Oregon'],
         list: [],
         loading: false,
         states: ["Alabama", "Alaska", "Arizona",
@@ -465,6 +466,15 @@
         } else {
           this.options = [];
         }
+      },
+      initRemoteMethod(value) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.options = this.list.filter(item => {
+            return value.findIndex(v => v === item.value) > -1;
+          });
+        }, 200);
       }
     }
   }
@@ -594,6 +604,7 @@
 | filter-method | 自定义搜索方法 | function | — | — |
 | remote | 是否为远程搜索 | boolean | — | false |
 | remote-method | 远程搜索方法 | function | — | — |
+| init-remote-method | 远程搜索初始化方法 | function | — | — |
 | loading | 是否正在从远程获取数据 | boolean | — | false |
 | loading-text | 远程加载时显示的文字 | string | — | 加载中 |
 | no-match-text | 搜索条件无匹配时显示的文字，也可以使用`slot="empty"`设置 | string | — | 无匹配数据 |
