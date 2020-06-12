@@ -538,7 +538,8 @@
           }
         }
         if (option) return option;
-        const label = (!isObject && !isNull && !isUndefined)
+        // 如果是远程方法则默认将没有option匹配的label设为空值显示
+        const label = (!isObject && !isNull && !isUndefined && !this.remote)
           ? value : '';
         let newOption = {
           value: value,
